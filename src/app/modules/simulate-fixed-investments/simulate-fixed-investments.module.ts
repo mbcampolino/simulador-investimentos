@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -7,11 +8,12 @@ import { SimulateFixedInvestmentsComponent } from './simulate-fixed-investments.
 
 @NgModule({
   declarations: [
-    SimulateFixedInvestmentsComponent
+    SimulateFixedInvestmentsComponent,
   ],
   imports: [
     CommonModule,
-    SimulateFixedInvestmentsRoutingModule
+    SimulateFixedInvestmentsRoutingModule,
+    FormsModule
   ]
 })
 export class SimulateFixedInvestmentsModule { }

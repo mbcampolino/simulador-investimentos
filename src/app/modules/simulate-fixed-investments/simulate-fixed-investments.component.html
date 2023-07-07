@@ -1,0 +1,35 @@
+<div class="root row">
+
+  <h2 class="title unselected">Simulador de <b>Investimentos</b></h2>
+
+  <div>
+    <p class="label_input unselected">valor inicial</p>
+    <input type="number" step="0.01" [(ngModel)]="fixedService.model.initialValue" >
+  </div>
+
+  <div>
+    <p class="label_input unselected">aporte mensal</p>
+    <input type="number" step="0.01" [(ngModel)]="fixedService.model.monthlyValue">
+  </div>
+
+  <div>
+    <p class="label_input unselected">tempo de investimento (meses)</p>
+    <input type="number" [(ngModel)]="fixedService.model.dueDate">
+  </div>
+
+  <div class="col">
+    <p class="label_input unselected">taxa de juros (ao mes)</p>
+    <input type="number" style="width: 50%;" [(ngModel)]="fixedService.model.taxValue">
+
+    <!-- <label class="switch" style="width: 50%;">
+      <input type="checkbox" class="checkbox">
+      <span class="slider round"></span>
+    </label> -->
+  </div>
+
+  <div style="width: 100%;">
+    <button class="button_action unselected"(click)="simulateInvestment()">simular investimento</button>
+  </div>
+
+
+</div>
