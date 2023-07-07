@@ -68,6 +68,14 @@ export class FixedInvestimentsServiceService {
 
   }
 
+  formatValue(number:number, showSign: boolean = true) {
+    if (showSign) {
+      return number.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+    }
+
+    return number.toLocaleString('pt-br');
+  }
+
   constructor() {
   }
 }

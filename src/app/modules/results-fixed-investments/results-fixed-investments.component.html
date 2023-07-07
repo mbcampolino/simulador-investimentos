@@ -1,13 +1,31 @@
 
-<div class="row root">
+<div class="row root ">
 
   <p (click)="backToSimulate()"><u>voltar para simulação</u></p>
-  <p>em janeiro de 2024 seguindo a taxa anual de
-    12% e descontando impostos e inflação você
+
+  <p class="description_value">até o fim do periodo seguindo a taxa mensal de
+    {{fixedService.model.taxValue}}% e descontando impostos e inflação você
     teria o equivalente a:</p>
 
-  <p><b>R$</b> 25,873.21</p>
-  <p><b>R$</b> 258,73</p>
+
+    <div class="row">
+      <div class="col" style="margin: 0; text-align: left;">
+        <p class="cifrao-result">R$ <span class="value-result">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTotalWithTax, false)}}</span><span class="after-value-result"> em caixa</span></p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col cifrao-result" style="margin: 0; text-align: left;">
+        <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
+      </div>
+    </div>
+
+  <app-table-investments [isHeader]="true"></app-table-investments>
+
+  <div *ngFor="let item of fixedService.historicData; last as last">
+    <app-table-investments [data]="item" [last]="last"></app-table-investments>
+  </div>
+
 
   <div style="width: 100%;">
     <button class="button_action unselected">compartilhar simulação</button>
