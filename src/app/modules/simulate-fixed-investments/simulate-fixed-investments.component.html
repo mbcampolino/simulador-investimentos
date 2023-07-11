@@ -19,11 +19,11 @@
         <input type="number" [(ngModel)]="fixedService.model.dueDate" min="1" step="1" pattern="[0-9]" oninput="this.value=(parseInt(this.value)||0)">
       </div>
       <div class="col-5">
-        <app-switch-context *ngIf="fixedService.model.dueDate!=1;else oneRepeat" nameOn="meses" nameOff="anos" [isOn]="fixedService.investimentsByMonth" (newItemEvent)="updateInvestmentTime($event)" />
+        <app-switch-context *ngIf="fixedService.model.dueDate!=1;else oneRepeat" nameOn="meses" nameOff="anos" [isOn]="fixedService.dueDateTypeByMonth()" (newItemEvent)="updateInvestmentTime($event)" />
       </div>
 
       <ng-template #oneRepeat>
-        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.investimentsByMonth" (newItemEvent)="updateInvestmentTime($event)" />
+        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.dueDateTypeByMonth()" (newItemEvent)="updateInvestmentTime($event)" />
       </ng-template>
     </div>
 
@@ -33,7 +33,7 @@
         <input type="number" [(ngModel)]="fixedService.model.taxValue">
       </div>
       <div class="col-5">
-        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth" (newItemEvent)="updateTax($event)"></app-switch-context>
+        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth()" (newItemEvent)="updateTax($event)"></app-switch-context>
       </div>
     </div>
 

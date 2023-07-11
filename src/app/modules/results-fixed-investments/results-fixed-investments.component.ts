@@ -19,7 +19,7 @@ export class ResultsFixedInvestmentsComponent {
   }
 
   share() {
-
+    return;
     this.exportToCsv("teste.csv", this.fixedService.historicData)
 
   }

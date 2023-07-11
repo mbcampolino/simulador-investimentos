@@ -10,7 +10,14 @@ export class FixedInvestimentsServiceService {
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
 
-  taxesByMonth = true
+  taxesByMonth() {
+    return this.model.taxType == "mês"
+  }
+
+  dueDateTypeByMonth() {
+    return this.model.dueDateType == "mês"
+  }
+
   investimentsByMonth = false
 
   model: InvestmentModel = {

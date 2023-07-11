@@ -11,7 +11,10 @@ import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investim
 })
 export class SimulateFixedInvestmentsComponent {
 
-  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService) {}
+  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService) {
+    console.log(fixedService.model.dueDateType)
+    console.log(fixedService.model.taxType)
+  }
 
   simulateInvestment() {
     this.router.navigate(['resultado']);
