@@ -15,7 +15,14 @@ export class ResultsFixedInvestmentsComponent {
   }
 
   detectMob() {
-    return ( screen.orientation.type == "portrait-primary" || window.innerWidth < 600);
+
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const isSizePrefer = window.innerWidth < 600;
+
+    var pc = isSizePrefer && !isMobile
+    var mobile = isSizePrefer && isMobile
+
+    return pc || mobile
   }
 
   backToSimulate() {
