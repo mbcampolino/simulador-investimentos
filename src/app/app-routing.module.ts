@@ -4,10 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 
   {
-    path: '', redirectTo: 'simular', pathMatch: 'full'
-  },
-  {
-    path: 'simular',
+    path: '',
     loadChildren: () => import('./modules/simulate-fixed-investments/simulate-fixed-investments.module').then(m => m.SimulateFixedInvestmentsModule)
   },
   {
