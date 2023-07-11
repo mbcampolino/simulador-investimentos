@@ -14,6 +14,10 @@ export class ResultsFixedInvestmentsComponent {
     fixedService.calcFixedInvestment()
   }
 
+  detectMob() {
+    return ( screen.orientation.type == "portrait-primary" || window.innerWidth < 600);
+  }
+
   backToSimulate() {
     this.router.navigate(['']);
   }

@@ -6,6 +6,7 @@
   margin-top: 32px;
   width: 100%;
   border-radius: 90px;
+  margin-bottom: 32px;
 }
 
 .description_value {
@@ -46,10 +47,22 @@
   vertical-align: baseline;
 }
 
-.wrapScroll {
+.max-content {
+  max-width: max-content;
+  width: max-content;
+  margin: 16px;
+}
+
+.expand-content {
+  max-width: 100%;
+  width: 100%;
+  margin: 16px;
+}
+
+.scrool {
   white-space: nowrap;
   overflow-x: scroll;
-  overflow: auto
+  overflow: auto;
 }
 
 .header {

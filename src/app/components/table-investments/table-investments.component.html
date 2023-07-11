@@ -1,4 +1,4 @@
-<div class="row item-table-par flex-nowrap" *ngIf="!isHeader;else headerTemplate" [ngClass]="{'item-table-par': (data.currentMonth % 2) == 0, 'item-table-impar': (data.currentMonth % 2) != 0, 'item-table-last': last}">
+<div class="row flex-nowrap" *ngIf="!isHeader;else headerTemplate" [ngClass]="{'item-table-par': (data.currentMonth % 2) == 0, 'item-table-impar': (data.currentMonth % 2) != 0, 'item-table-last': last}">
   <div class="col-1" *ngIf="data.currentMonth > 0;else monthzero">{{data.currentMonth}}</div>
   <div class="col">{{service.formatValue(data.currentTax)}}</div>
   <div class="col">{{service.formatValue(data.currentTotalWithoutTax)}}</div>

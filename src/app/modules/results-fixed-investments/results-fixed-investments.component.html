@@ -9,7 +9,7 @@
         </svg>
       </div>
       <div class="col" style="margin: 0; text-align: left;">
-        <p style="margin-left: 16px;"><u>voltar para simulação</u></p>
+        <p style="margin-left: 16px;">voltar para simulação</p>
       </div>
     </div>
 
@@ -29,15 +29,15 @@
           <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
         </div>
       </div>
+    <div [ngClass]="{'scrool': detectMob()}">
+      <div [ngClass]="{'expand-content': !detectMob(), 'max-content': detectMob()}">
+        <app-table-investments  [isHeader]="true"></app-table-investments>
 
-    <div class="wrapScroll">
-      <app-table-investments  [isHeader]="true"></app-table-investments>
-
-      <div *ngFor="let item of fixedService.historicData; last as last">
-        <app-table-investments [data]="item" [last]="last"></app-table-investments>
+        <div *ngFor="let item of fixedService.historicData; last as last">
+          <app-table-investments [data]="item" [last]="last"></app-table-investments>
+        </div>
       </div>
     </div>
-
     <div style="width: 100%;">
       <button class="button_action unselected" (click)="share()">compartilhar simulação</button>
     </div>

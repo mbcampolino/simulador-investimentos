@@ -39,9 +39,9 @@ export class FixedInvestimentsServiceService {
     var currentTaxValue: number = 0
 
     if (this.model.dueDateType == "ano") {
-      currentDueDate = this.model.dueDate * 13
+      currentDueDate = (this.model.dueDate) * 12
     } else {
-      currentDueDate = this.model.dueDate + 1
+      currentDueDate = this.model.dueDate
     }
 
     if (this.model.taxType == "ano") {
@@ -50,7 +50,7 @@ export class FixedInvestimentsServiceService {
       currentTaxValue = this.model.taxValue
     }
 
-    for (var i : number = 0 ; i < currentDueDate; i++) {
+    for (var i : number = 0 ; i < currentDueDate + 1; i++) {
 
       if (i===0) {
         var data : HistoricData = {
