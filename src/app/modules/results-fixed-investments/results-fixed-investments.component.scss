@@ -8,18 +8,6 @@
   border-radius: 90px;
 }
 
-.root {
-  padding: 32px;
-  width:100%;
-  min-width: 300px;
-}
-
-* {
-  margin: auto;
-  vertical-align: baseline;
-  padding: 0;
-}
-
 .description_value {
   margin-top: 42px;
   margin-bottom: 14px;
@@ -56,4 +44,16 @@
   font-weight: 500;
   margin: auto;
   vertical-align: baseline;
+}
+
+.wrapScroll {
+  white-space: nowrap;
+  overflow-x: scroll;
+  overflow: auto
+}
+
+.header {
+  margin-top: 16px;
+  width: 300px;
+  cursor: pointer;
 }

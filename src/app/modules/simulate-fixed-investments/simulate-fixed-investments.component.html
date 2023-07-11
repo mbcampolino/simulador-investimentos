@@ -31,7 +31,7 @@
       <p class="label_input unselected">taxa de juros</p>
       <div class="col percentInput">
         <input type="number" [(ngModel)]="fixedService.model.taxValue">
-        <span>%</span>
+        <span class="unselected">%</span>
       </div>
       <div class="col-5">
         <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth()" (newItemEvent)="updateTax($event)"></app-switch-context>

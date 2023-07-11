@@ -1,5 +1,5 @@
-<div class="row item-table-par" *ngIf="!isHeader;else headerTemplate" [ngClass]="{'item-table-par': (data.currentMonth % 2) == 0, 'item-table-impar': (data.currentMonth % 2) != 0, 'item-table-last': last}">
-  <div class="col" *ngIf="data.currentMonth > 0;else monthzero">{{data.currentMonth}}</div>
+<div class="row item-table-par flex-nowrap" *ngIf="!isHeader;else headerTemplate" [ngClass]="{'item-table-par': (data.currentMonth % 2) == 0, 'item-table-impar': (data.currentMonth % 2) != 0, 'item-table-last': last}">
+  <div class="col-1" *ngIf="data.currentMonth > 0;else monthzero">{{data.currentMonth}}</div>
   <div class="col">{{service.formatValue(data.currentTax)}}</div>
   <div class="col">{{service.formatValue(data.currentTotalWithoutTax)}}</div>
   <div class="col">{{service.formatValue(data.totalTax)}}</div>
@@ -7,12 +7,12 @@
 </div>
 
 <ng-template #monthzero>
-  <div class="col">*</div>
+  <div class="col-1">*</div>
 </ng-template>
 
 <ng-template #headerTemplate>
-  <div class="row header-table">
-    <div class="col">mês</div>
+  <div class="row header-table flex-nowrap">
+    <div class="col-1">mês</div>
     <div class="col">juros</div>
     <div class="col">investido</div>
     <div class="col">juros total</div>

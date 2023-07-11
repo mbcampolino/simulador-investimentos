@@ -1,15 +1,15 @@
 
 <div class="container">
-  <div class="row root ">
+  <div class="row">
 
-    <div class="row">
+    <div class="row header" (click)="backToSimulate()">
       <div class="col" style="margin: 0; text-align: left; max-width: 19px;">
-        <svg (click)="backToSimulate()" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="19" height="28" viewBox="0 0 19 28" fill="none">
+        <svg  xmlns="http://www.w3.org/2000/svg" width="19" height="28" viewBox="0 0 19 28" fill="none">
           <path d="M13.8182 0L0 13.8182L13.8182 27.6364L19 22.4545L10.3636 13.8182L19 5.18182L13.8182 0Z" fill="black"/>
         </svg>
       </div>
       <div class="col" style="margin: 0; text-align: left;">
-        <p style="margin-left: 16px;"><u (click)="backToSimulate()" style="cursor: pointer;">voltar para simulação</u></p>
+        <p style="margin-left: 16px;"><u>voltar para simulação</u></p>
       </div>
     </div>
 
@@ -30,12 +30,13 @@
         </div>
       </div>
 
-    <app-table-investments [isHeader]="true"></app-table-investments>
+    <div class="wrapScroll">
+      <app-table-investments  [isHeader]="true"></app-table-investments>
 
-    <div *ngFor="let item of fixedService.historicData; last as last">
-      <app-table-investments [data]="item" [last]="last"></app-table-investments>
+      <div *ngFor="let item of fixedService.historicData; last as last">
+        <app-table-investments [data]="item" [last]="last"></app-table-investments>
+      </div>
     </div>
-
 
     <div style="width: 100%;">
       <button class="button_action unselected" (click)="share()">compartilhar simulação</button>
