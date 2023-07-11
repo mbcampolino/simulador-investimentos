@@ -1,35 +1,46 @@
-<div class="root row">
+<div class="container">
+  <div class="row">
 
-  <h2 class="title unselected">Simulador de <b>Investimentos</b></h2>
+    <h2 class="title unselected">Simulador de <b>Investimentos</b></h2>
 
-  <div>
-    <p class="label_input unselected">valor inicial</p>
-    <input type="number" step="0.01" [(ngModel)]="fixedService.model.initialValue" >
+    <div>
+      <p class="label_input money unselected">valor inicial</p>
+      <input currencyMask [(ngModel)]="fixedService.model.initialValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" />
+    </div>
+
+    <div>
+      <p class="label_input unselected">aporte mensal</p>
+      <input currencyMask [(ngModel)]="fixedService.model.monthlyValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" />
+    </div>
+
+    <div class="row p-0 m-0">
+      <p class="label_input unselected">tempo de investimento</p>
+      <div class="col">
+        <input type="number" [(ngModel)]="fixedService.model.dueDate" min="1" step="1" pattern="[0-9]" oninput="this.value=(parseInt(this.value)||0)">
+      </div>
+      <div class="col-5">
+        <app-switch-context *ngIf="fixedService.model.dueDate!=1;else oneRepeat" nameOn="meses" nameOff="anos" [isOn]="fixedService.investimentsByMonth" (newItemEvent)="updateInvestmentTime($event)" />
+      </div>
+
+      <ng-template #oneRepeat>
+        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.investimentsByMonth" (newItemEvent)="updateInvestmentTime($event)" />
+      </ng-template>
+    </div>
+
+    <div class="row p-0 m-0" >
+      <p class="label_input unselected">taxa de juros</p>
+      <div class="col">
+        <input type="number" [(ngModel)]="fixedService.model.taxValue">
+      </div>
+      <div class="col-5">
+        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth" (newItemEvent)="updateTax($event)"></app-switch-context>
+      </div>
+    </div>
+
+    <div style="width: 100%;">
+      <button class="button_action unselected"(click)="simulateInvestment()">simular investimento</button>
+    </div>
+
+
   </div>
-
-  <div>
-    <p class="label_input unselected">aporte mensal</p>
-    <input type="number" step="0.01" [(ngModel)]="fixedService.model.monthlyValue">
-  </div>
-
-  <div>
-    <p class="label_input unselected">tempo de investimento (meses)</p>
-    <input type="number" [(ngModel)]="fixedService.model.dueDate">
-  </div>
-
-  <div class="col">
-    <p class="label_input unselected">taxa de juros (ao mes)</p>
-    <input type="number" style="width: 50%;" [(ngModel)]="fixedService.model.taxValue">
-
-    <!-- <label class="switch" style="width: 50%;">
-      <input type="checkbox" class="checkbox">
-      <span class="slider round"></span>
-    </label> -->
-  </div>
-
-  <div style="width: 100%;">
-    <button class="button_action unselected"(click)="simulateInvestment()">simular investimento</button>
-  </div>
-
-
 </div>

@@ -10,11 +10,14 @@ export class FixedInvestimentsServiceService {
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
 
+  taxesByMonth = true
+  investimentsByMonth = false
+
   model: InvestmentModel = {
     initialValue: 100000,
-    dueDate: 12,
-    dueDateType: "per-month",
-    taxType: "per-month",
+    dueDate: 1,
+    dueDateType: "ano",
+    taxType: "mês",
     taxValue: 1,
     monthlyValue: 1000
   }
@@ -25,16 +28,22 @@ export class FixedInvestimentsServiceService {
 
     this.historicData = []
 
-    // if (this.model.dueDateType == "per-year") {
-    //   this.model.dueDate = this.model.dueDate * 12
-    // }
+    var currentDueDate: number = 0
+    var currentTaxValue: number = 0
 
-    // if (this.model.taxType == "per-year") {
-    //   this.model.taxValue = this.model.taxValue / 12
-    // }
+    if (this.model.dueDateType == "ano") {
+      currentDueDate = this.model.dueDate * 13
+    } else {
+      currentDueDate = this.model.dueDate + 1
+    }
 
+    if (this.model.taxType == "ano") {
+      currentTaxValue = this.model.taxValue / 12
+    } else {
+      currentTaxValue = this.model.taxValue
+    }
 
-    for (var i : number = 0 ; i < this.model.dueDate; i++) {
+    for (var i : number = 0 ; i < currentDueDate; i++) {
 
       if (i===0) {
         var data : HistoricData = {
@@ -47,7 +56,7 @@ export class FixedInvestimentsServiceService {
         this.historicData.push(data)
       } else {
 
-        var currentTax = (this.historicData[i-1].currentTotalWithTax / 100) * this.model.taxValue
+        var currentTax = (this.historicData[i-1].currentTotalWithTax / 100) * currentTaxValue
         var currentTotalWithTax = (this.historicData[i-1].currentTotalWithTax + currentTax) + this.model.monthlyValue
         var totalTax = currentTax + this.historicData[i-1].totalTax;
 
@@ -70,10 +79,17 @@ export class FixedInvestimentsServiceService {
 
   formatValue(number:number, showSign: boolean = true) {
     if (showSign) {
-      return number.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+      return number.toLocaleString('pt-br',{style: 'currency', currency: 'BRL', minimumFractionDigits: 2, currencyDisplay: 'narrowSymbol'});
     }
 
-    return number.toLocaleString('pt-br');
+    return new Intl.NumberFormat('de-DE', {
+      style: 'currency',
+      currency: 'EUR',
+      currencyDisplay: "code"
+    })
+    .format(number)
+    .replace("EUR", "")
+    .trim()
   }
 
   constructor() {

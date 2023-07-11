@@ -17,4 +17,14 @@ export class SimulateFixedInvestmentsComponent {
     this.router.navigate(['resultado']);
   }
 
+  updateTax(taxPerMonth:boolean) {
+    this.fixedService.model.taxType = taxPerMonth ? "mês" : "ano"
+    console.log("taxPerMonth" + this.fixedService.model.taxType)
+  }
+
+  updateInvestmentTime(dueDateType:boolean) {
+    this.fixedService.model.dueDateType = dueDateType ? "mês" : "ano"
+    console.log("dueDateType" + this.fixedService.model.dueDateType)
+  }
+
 }
