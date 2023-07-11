@@ -1,0 +1,46 @@
+
+<div class="container">
+  <div class="row root ">
+
+    <div class="row">
+      <div class="col" style="margin: 0; text-align: left; max-width: 19px;">
+        <svg (click)="backToSimulate()" style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="19" height="28" viewBox="0 0 19 28" fill="none">
+          <path d="M13.8182 0L0 13.8182L13.8182 27.6364L19 22.4545L10.3636 13.8182L19 5.18182L13.8182 0Z" fill="black"/>
+        </svg>
+      </div>
+      <div class="col" style="margin: 0; text-align: left;">
+        <p style="margin-left: 16px;"><u (click)="backToSimulate()" style="cursor: pointer;">voltar para simulação</u></p>
+      </div>
+    </div>
+
+    <p class="description_value">até o fim do periodo seguindo uma taxa de
+      {{fixedService.model.taxValue}}% ao {{fixedService.model.taxType}} sem impostos e inflação você
+      teria o equivalente a:</p>
+
+
+      <div class="row">
+        <div class="col" style="margin: 0; text-align: left;">
+          <p class="cifrao-result">R$ <span class="value-result">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTotalWithTax, false)}}</span><span class="after-value-result"> em caixa</span></p>
+        </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 32px;">
+        <div class="col cifrao-result" style="margin: 0; text-align: left;">
+          <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
+        </div>
+      </div>
+
+    <app-table-investments [isHeader]="true"></app-table-investments>
+
+    <div *ngFor="let item of fixedService.historicData; last as last">
+      <app-table-investments [data]="item" [last]="last"></app-table-investments>
+    </div>
+
+
+    <div style="width: 100%;">
+      <button class="button_action unselected" (click)="share()">compartilhar simulação</button>
+    </div>
+  </div>
+</div>
+
+
