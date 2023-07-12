@@ -15,7 +15,7 @@ export class FixedInvestimentsServiceService {
 
   constructor(private httpClient: HttpClient) {
 
-    var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
+    var backend = "/api/servico/sitebcb/historicotaxasjuros"
     var mock = "./../../assets/mock/mockselic.json"
 
     this.getApiSelic(backend)
@@ -115,13 +115,17 @@ export class FixedInvestimentsServiceService {
 
     const HEADERS = {
       'Accept': 'application/json',
+      'withCredentials':'true',
+      'Access-Control-Allow-Origin':'*'
     }
 
     const options = { headers: HEADERS };
 
     return this.httpClient.get<SelicArray>(url,options).subscribe(resultado => {
       console.log(resultado.conteudo[0].MetaSelic)
-      this.currentSelic = Number(Number(resultado.conteudo[0].MetaSelic).toFixed(2));
+      var selic = Number(Number(resultado.conteudo[0].MetaSelic).toFixed(2));
+      this.currentSelic = selic
+      this.model.taxValue = selic
     }, error => {
       this.currentSelic = 0
       console.log("error catch" + error)
