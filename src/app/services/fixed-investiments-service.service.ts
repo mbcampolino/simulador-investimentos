@@ -117,8 +117,10 @@ export class FixedInvestimentsServiceService {
 
     const options = { headers: HEADERS };
 
-    return this.httpClient.get<SelicArray>(url,options).subscribe(resultado =>
+    return this.httpClient.get<SelicArray>(url,options).subscribe(resultado => {
       console.log(resultado.conteudo[0].MetaSelic)
+      this.currentSelic = resultado.conteudo[0].MetaSelic
+    }
     );
   }
 
