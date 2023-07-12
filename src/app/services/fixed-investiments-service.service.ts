@@ -110,7 +110,7 @@ export class FixedInvestimentsServiceService {
   getApiSelic() {
     var url = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
     const HEADERS = {
-      Accept: 'application/json',
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
     }
