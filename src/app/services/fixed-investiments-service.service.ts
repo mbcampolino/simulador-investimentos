@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { InvestmentModel } from '../models/InvestmentModel';
 import { HistoricData } from '../models/historicData';
+import { HttpClient } from '@angular/common/http';
+import { SelicArray } from './../models/SelicArray';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +11,11 @@ export class FixedInvestimentsServiceService {
 
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
+  currentSelic: number = 13.75
+
+  constructor(private httpClient: HttpClient) {
+    this.getApiSelic()
+  }
 
   taxesByMonth() {
     return this.model.taxType == "mês"
@@ -24,8 +31,8 @@ export class FixedInvestimentsServiceService {
     initialValue: 100000,
     dueDate: 1,
     dueDateType: "ano",
-    taxType: "mês",
-    taxValue: 1,
+    taxType: "ano",
+    taxValue: this.currentSelic,
     monthlyValue: 1000
   }
 
@@ -99,6 +106,20 @@ export class FixedInvestimentsServiceService {
     .trim()
   }
 
-  constructor() {
+
+  getApiSelic() {
+    var url = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
+    const HEADERS = {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+    }
+
+    const options = { headers: HEADERS };
+
+    return this.httpClient.get<SelicArray>(url,options).subscribe(resultado =>
+      console.log(resultado.conteudo[0].MetaSelic)
+    );
   }
+
 }

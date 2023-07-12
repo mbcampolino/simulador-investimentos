@@ -36,6 +36,7 @@
       <div class="col-5">
         <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth()" (newItemEvent)="updateTax($event)"></app-switch-context>
       </div>
+      <p class="label_current_tax_selic unselected">taxa selic atual ({{fixedService.currentSelic}}%) ano</p>
     </div>
 
     <div style="width: 100%;">
