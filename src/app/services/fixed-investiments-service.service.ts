@@ -14,7 +14,11 @@ export class FixedInvestimentsServiceService {
   currentSelic: number = 13.75
 
   constructor(private httpClient: HttpClient) {
-    this.getApiSelic()
+
+    var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
+    var mock = "./../../assets/mock/mockselic.json"
+
+    this.getApiSelic(backend)
   }
 
   taxesByMonth() {
@@ -107,12 +111,11 @@ export class FixedInvestimentsServiceService {
   }
 
 
-  getApiSelic() {
-    var url = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
+  getApiSelic(url : string) {
+
     const HEADERS = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+      'withCredentials':'true'
     }
 
     const options = { headers: HEADERS };
@@ -121,6 +124,7 @@ export class FixedInvestimentsServiceService {
       console.log(resultado.conteudo[0].MetaSelic)
       this.currentSelic = Number(Number(resultado.conteudo[0].MetaSelic).toFixed(2));
     }, error => {
+      this.currentSelic = 0
       console.log("error catch" + error)
     }
     );
