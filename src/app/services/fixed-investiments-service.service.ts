@@ -119,7 +119,9 @@ export class FixedInvestimentsServiceService {
 
     return this.httpClient.get<SelicArray>(url,options).subscribe(resultado => {
       console.log(resultado.conteudo[0].MetaSelic)
-      this.currentSelic = resultado.conteudo[0].MetaSelic
+      this.currentSelic = Number(Number(resultado.conteudo[0].MetaSelic).toFixed(2));
+    }, error => {
+      console.log("error catch" + error)
     }
     );
   }
