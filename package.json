@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build-prod": "ng build --configuration production --output-path docs --base-href=/simulador-investimentos/"
   },
   "private": true,
   "dependencies": {
