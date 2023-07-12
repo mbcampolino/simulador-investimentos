@@ -115,8 +115,8 @@ export class FixedInvestimentsServiceService {
 
     const HEADERS = {
       'Accept': 'application/json',
-      'withCredentials':'true',
-      'Access-Control-Allow-Origin':'*'
+      // 'withCredentials':'true',
+      // 'Access-Control-Allow-Origin':'*'
     }
 
     const options = { headers: HEADERS };
