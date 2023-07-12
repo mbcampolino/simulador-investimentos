@@ -11,7 +11,7 @@ export class FixedInvestimentsServiceService {
 
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
-  currentSelic: number = 13.75
+  currentSelic: number = 0
 
   constructor(private httpClient: HttpClient) {
 
