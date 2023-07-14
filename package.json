@@ -6,7 +6,8 @@
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-prod": "ng build --configuration production --output-path docs --base-href=/simulador-investimentos/"
+    "build-prod": "ng build --configuration production --output-path docs --base-href=/simulador-investimentos/",
+    "server": "npx json-server --watch src/app/server/index.js --port 3000"
   },
   "private": true,
   "dependencies": {
@@ -18,7 +19,9 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "apexcharts": "^3.41.0",
     "bootstrap": "^5.3.0",
+    "ng-apexcharts": "^1.8.0",
     "ng2-currency-mask": "^13.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

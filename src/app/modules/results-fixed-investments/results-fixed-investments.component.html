@@ -29,6 +29,17 @@
           <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(fixedService.historicData.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
         </div>
       </div>
+
+      <div style="text-align:center">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [title]="chartOptions.title"
+          [colors]="chartOptions.colors"
+        ></apx-chart>
+      </div>
+
     <div [ngClass]="{'scrool': detectMob()}">
       <div [ngClass]="{'expand-content': !detectMob(), 'max-content': detectMob()}">
         <app-table-investments  [isHeader]="true"></app-table-investments>
@@ -38,6 +49,7 @@
         </div>
       </div>
     </div>
+
     <div style="width: 100%;">
       <button class="button_action unselected" (click)="share()">compartilhar simulação</button>
     </div>
