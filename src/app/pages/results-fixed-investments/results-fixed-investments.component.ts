@@ -46,12 +46,12 @@ export class ResultsFixedInvestmentsComponent {
 
     var input = new InputModel()
 
-    input.initialValue = Number.parseFloat(this.activeRoute.snapshot.params['initialValue']),
-    input.dueDate = Number.parseInt(this.activeRoute.snapshot.params['dueDate']),
-    input.dueDateType = this.activeRoute.snapshot.params['dueDateType'],
-    input.taxType =  this.activeRoute.snapshot.params['taxType'],
-    input.taxValue = Number.parseFloat(this.activeRoute.snapshot.params['taxValue']),
-    input.monthlyValue = Number.parseFloat(this.activeRoute.snapshot.params['monthlyValue'])
+    input.initialValue = Number.parseFloat(this.activeRoute.snapshot.queryParamMap.get('initialValue')!!),
+    input.dueDate = Number.parseInt(this.activeRoute.snapshot.queryParamMap.get('dueDate')!!),
+    input.dueDateType = this.activeRoute.snapshot.queryParamMap.get('dueDateType')!!,
+    input.taxType =  this.activeRoute.snapshot.queryParamMap.get('taxType')!!,
+    input.taxValue = Number.parseFloat(this.activeRoute.snapshot.queryParamMap.get('taxValue')!!),
+    input.monthlyValue = Number.parseFloat(this.activeRoute.snapshot.queryParamMap.get('monthlyValue')!!)
 
     return input
   }
@@ -127,10 +127,17 @@ export class ResultsFixedInvestmentsComponent {
   async share() {
     try {
 
+      var query = 'initialValue=' + this.getModel().initialValue+
+      '&monthlyValue=' + this.getModel().monthlyValue+
+      '&dueDateType=' + this.getModel().dueDateType+
+      '&taxType=' + this.getModel().taxType+
+      '&taxValue=' + this.getModel().taxValue+
+      '&dueDate=' + this.getModel().dueDate
+
       const shareData = {
         title: "Meus investimentos",
         text: "Veja esta simulação de investimento!",
-        url: this.router.url,
+        url: 'https://mbcampolino.github.io/simulador-investimentos/?' + query,
       };
 
       await navigator.share(shareData);
