@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'resultado',
-    component: ResultsFixedInvestmentsComponent
+    loadChildren: () => import('./pages/results-fixed-investments/results-fixed-invetments.module').then(m => m.ResultsFixedInvetmentsModule)
   },
 ];
 
