@@ -37,6 +37,7 @@ export class ResultsFixedInvestmentsComponent {
 
   constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute) {
     var model = this.getModel()
+    console.log(model)
     this.investments = this.fixedService.calcFixedInvestment(model)
     this.plotChart(this.investments)
   }
@@ -45,11 +46,12 @@ export class ResultsFixedInvestmentsComponent {
 
     var input = new InputModel()
 
-    input.initialValue = Number.parseInt(this.activeRoute.snapshot.params['initialValue']),
+    input.initialValue = Number.parseFloat(this.activeRoute.snapshot.params['initialValue']),
+    input.dueDate = Number.parseInt(this.activeRoute.snapshot.params['dueDate']),
     input.dueDateType = this.activeRoute.snapshot.params['dueDateType'],
     input.taxType =  this.activeRoute.snapshot.params['taxType'],
-    input.taxValue = Number.parseInt(this.activeRoute.snapshot.params['taxValue']),
-    input.monthlyValue = Number.parseInt(this.activeRoute.snapshot.params['monthlyValue'])
+    input.taxValue = Number.parseFloat(this.activeRoute.snapshot.params['taxValue']),
+    input.monthlyValue = Number.parseFloat(this.activeRoute.snapshot.params['monthlyValue'])
 
     return input
   }
