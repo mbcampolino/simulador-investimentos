@@ -1,7 +1,5 @@
-import { InvestmentModel } from './../../models/InvestmentModel';
 import { Router } from '@angular/router';
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
 import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investiments-service.service';
 
 @Component({
@@ -11,16 +9,20 @@ import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investim
 })
 export class SimulateFixedInvestmentsComponent {
 
-  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService) {
-    console.log(fixedService.model.dueDateType)
-    console.log(fixedService.model.taxType)
-  }
+  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService) {}
 
   simulateInvestment() {
-    this.router.navigate(['resultado']);
+    this.router.navigate(['resultado', {
+      initialValue: this.fixedService.model.initialValue,
+      monthlyValue: this.fixedService.model.monthlyValue,
+      dueDateType: this.fixedService.model.dueDateType,
+      taxType: this.fixedService.model.taxType,
+      taxValue: this.fixedService.model.taxValue,
+      dueDate: this.fixedService.model.dueDate,
+    }]);
   }
 
-  updateTax(taxPerMonth:boolean) {
+  updateTax(taxPerMonth : boolean) {
     this.fixedService.model.taxType = taxPerMonth ? "mês" : "ano"
     console.log("taxPerMonth" + this.fixedService.model.taxType)
   }

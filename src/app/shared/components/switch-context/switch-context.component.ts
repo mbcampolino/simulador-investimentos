@@ -10,13 +10,11 @@ export class SwitchContextComponent {
   @Input() nameOn = "Sim"
   @Input() nameOff = "Não"
 
-  @Input() isOn = true
+  @Input() isOn? : boolean
 
   @Output() newItemEvent = new EventEmitter<boolean>();
 
-  updadeCheckBox(change: any) {
-    this.isOn = change.currentTarget.checked
-    this.newItemEvent.emit(this.isOn);
+  ngOnInit() {
     console.log(this.isOn)
   }
 

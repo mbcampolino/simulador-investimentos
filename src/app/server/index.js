@@ -5,5 +5,3 @@ module.exports = () => ({
 })
 
 //npx json-server --watch src/app/server/index.js --port 3000
-
-g

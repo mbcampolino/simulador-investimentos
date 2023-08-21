@@ -1,5 +1,5 @@
 <label class="switch">
-  <input type="checkbox" class="checkbox" [(ngModel)]="isOn" (change)="updadeCheckBox($event)" >
+  <input type="checkbox" class="checkbox" [(ngModel)]="isOn" (change)="newItemEvent.emit(this.isOn)" >
   <span class="slider round" style="justify-content: center;">
     <span class="name on" [ngClass]="{selected: isOn, unselected: !isOn}">{{nameOn}}</span>
     <span class="name off"[ngClass]="{selected: !isOn, unselected: isOn}">{{nameOff}}</span>

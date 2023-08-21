@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investiments-service.service';
 
 import {
@@ -11,6 +11,7 @@ import {
   ApexOptions,
   ApexYAxis
 } from "ng-apexcharts";
+import { HistoricData, InputModel } from 'src/app/models/historicData';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | any;
@@ -32,21 +33,35 @@ export class ResultsFixedInvestmentsComponent {
   chart: ChartComponent = {} as ChartComponent
   public chartOptions = {} as Partial<ChartOptions>;
 
-  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService) {
-    fixedService.calcFixedInvestment()
-    this.plotChart()
+  investments: HistoricData []
+
+  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute) {
+    var model = this.getModel()
+    this.investments = this.fixedService.calcFixedInvestment(model)
+    this.plotChart(this.investments)
   }
 
-  plotChart() {
+  getModel() : InputModel {
 
-    /// faz calculo com observador, subscriber nesse componente e plota o grafico e a tabela
+    var input = new InputModel()
+
+    input.initialValue = Number.parseInt(this.activeRoute.snapshot.params['initialValue']),
+    input.dueDateType = this.activeRoute.snapshot.params['dueDateType'],
+    input.taxType =  this.activeRoute.snapshot.params['taxType'],
+    input.taxValue = Number.parseInt(this.activeRoute.snapshot.params['taxValue']),
+    input.monthlyValue = Number.parseInt(this.activeRoute.snapshot.params['monthlyValue'])
+
+    return input
+  }
+
+  plotChart(historic: HistoricData []) {
 
     var meses: number[] = []
     var valueTotal: number[] = []
     var invested: number[] = []
     var tax: number[] = []
 
-    this.fixedService.historicData.forEach(element => {
+    historic.forEach(element => {
       meses.push(element.currentMonth)
       valueTotal.push(element.currentTotalWithTax)
       tax.push(element.totalTax)
@@ -107,46 +122,20 @@ export class ResultsFixedInvestmentsComponent {
     this.router.navigate(['']);
   }
 
-  share() {
-    return;
-    this.exportToCsv("teste.csv", this.fixedService.historicData)
+  async share() {
+    try {
 
-  }
+      const shareData = {
+        title: "Meus investimentos",
+        text: "Veja esta simulação de investimento!",
+        url: this.router.url,
+      };
 
-  exportToCsv(filename: string, rows: any[]) {
-    if (!rows || !rows.length) {
-      return;
+      await navigator.share(shareData);
+    } catch (err) {
+
     }
-    const separator = '|';
-    const keys = Object.keys(rows[0]);
-    const csvContent =
-      keys.join(separator) +
-      '\n' +
-      rows.map(row => {
-        return keys.map(k => {
-          let cell = row[k] === null || row[k] === undefined ? '' : row[k];
-          cell = cell instanceof Date
-            ? cell.toLocaleString()
-            : cell.toString().replace(/"/g, '""');
-          if (cell.search(/("|\n)/g) >= 0) {
-            cell = `"${cell}"`;
-          }
-          return cell;
-        }).join(separator);
-      }).join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const link = document.createElement('a');
-      if (link.download !== undefined) {
-        // Browsers that support HTML5 download attribute
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', filename);
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
+    return;
   }
 
 }

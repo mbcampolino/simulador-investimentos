@@ -1,13 +1,17 @@
+import { InputModel } from './../models/historicData';
 import { Injectable } from '@angular/core';
 import { InvestmentModel } from '../models/InvestmentModel';
 import { HistoricData } from '../models/historicData';
 import { HttpClient } from '@angular/common/http';
 import { SelicArray } from './../models/SelicArray';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FixedInvestimentsServiceService {
+
+  model = new InputModel()
 
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
@@ -21,44 +25,33 @@ export class FixedInvestimentsServiceService {
     this.getApiSelic(backend)
   }
 
-  taxesByMonth() {
-    return this.model.taxType == "mês"
-  }
+  // taxesByMonth() {
+  //   return this.activeRoute.snapshot.params['taxType'] == "mês"
+  // }
 
-  dueDateTypeByMonth() {
-    return this.model.dueDateType == "mês"
-  }
+  // dueDateTypeByMonth() {
+  //   return this.activeRoute.snapshot.params['dueDateType'] == "mês"
+  // }
 
   investimentsByMonth = false
 
-  model: InvestmentModel = {
-    initialValue: 100000,
-    dueDate: 1,
-    dueDateType: "ano",
-    taxType: "ano",
-    taxValue: this.currentSelic,
-    monthlyValue: 1000
-  }
+  calcFixedInvestment(inputModel: InputModel) : HistoricData[] {
 
-  historicData: HistoricData[] = []
-
-  calcFixedInvestment() {
-
-    this.historicData = []
+    var historicData = []
 
     var currentDueDate: number = 0
     var currentTaxValue: number = 0
 
-    if (this.model.dueDateType == "ano") {
-      currentDueDate = (this.model.dueDate) * 12
+    if (inputModel.dueDateType == "ano") {
+      currentDueDate = (inputModel.dueDate) * 12
     } else {
-      currentDueDate = this.model.dueDate
+      currentDueDate = inputModel.dueDate
     }
 
-    if (this.model.taxType == "ano") {
-      currentTaxValue = this.model.taxValue / 12
+    if (inputModel.taxType == "ano") {
+      currentTaxValue = inputModel.taxValue / 12
     } else {
-      currentTaxValue = this.model.taxValue
+      currentTaxValue = inputModel.taxValue
     }
 
     for (var i : number = 0 ; i < currentDueDate + 1; i++) {
@@ -67,18 +60,21 @@ export class FixedInvestimentsServiceService {
         var data : HistoricData = {
           'currentMonth' : 0,
           'currentTax' : 0,
-          'currentTotalWithTax' : this.model.initialValue,
-          'currentTotalWithoutTax' : this.model.initialValue,
+          'currentTotalWithTax' : inputModel.initialValue,
+          'currentTotalWithoutTax' : inputModel.initialValue,
           'totalTax': 0
         }
-        this.historicData.push(data)
+        historicData.push(data)
       } else {
 
-        var currentTax = (this.historicData[i-1].currentTotalWithTax / 100) * currentTaxValue
-        var currentTotalWithTax = (this.historicData[i-1].currentTotalWithTax + currentTax) + this.model.monthlyValue
-        var totalTax = currentTax + this.historicData[i-1].totalTax;
+        var currentTax = (historicData[i-1].currentTotalWithTax / 100) * currentTaxValue
 
-        var currentTotalWithoutTax = (this.historicData[i-1].currentTotalWithoutTax) + this.model.monthlyValue
+        var totalTax = currentTax + historicData[i-1].totalTax;
+
+        //console.log(historicData[i-1].currentTotalWithTax + " + " + currentTax + " + " + inputModel.monthlyValue)
+
+        var currentTotalWithTax = (historicData[i-1].currentTotalWithTax + currentTax) + inputModel.monthlyValue
+        var currentTotalWithoutTax = (historicData[i-1].currentTotalWithoutTax) + inputModel.monthlyValue
 
         var data : HistoricData = {
           'currentMonth' : i,
@@ -87,11 +83,12 @@ export class FixedInvestimentsServiceService {
           'currentTotalWithoutTax' : currentTotalWithoutTax,
           'totalTax': totalTax
         }
-        this.historicData.push(data)
+        //console.log(data)
+        historicData.push(data)
       }
     }
 
-    console.log(this.historicData)
+    return historicData
 
   }
 
@@ -115,22 +112,25 @@ export class FixedInvestimentsServiceService {
 
     const HEADERS = {
       'Accept': 'application/json',
-      // 'withCredentials':'true',
-      // 'Access-Control-Allow-Origin':'*'
+      'withCredentials':'true',
+      'Access-Control-Allow-Origin':'*'
     }
 
     const options = { headers: HEADERS };
 
-    return this.httpClient.get<SelicArray>(url,options).subscribe(resultado => {
-      console.log(resultado.conteudo[0].MetaSelic)
-      var selic = Number(Number(resultado.conteudo[0].MetaSelic).toFixed(2));
-      this.currentSelic = selic
-      this.model.taxValue = selic
-    }, error => {
-      this.currentSelic = 0
-      console.log("error catch" + error)
-    }
-    );
+
+    return this.httpClient.get<SelicArray>(url,options).subscribe(
+      {
+        next: (result: SelicArray) => {
+          var selic = Number(Number(result.conteudo[0].MetaSelic).toFixed(2));
+          this.currentSelic = selic
+        },
+        error: (err: Error) => {
+          this.currentSelic = 0
+          console.log("error catch" + err)
+        }
+      }
+    )
   }
 
 }

@@ -19,12 +19,8 @@
         <input type="number" [(ngModel)]="fixedService.model.dueDate" min="1" step="1" pattern="[0-9]" oninput="this.value=(parseInt(this.value)||0)">
       </div>
       <div class="col-5">
-        <app-switch-context *ngIf="fixedService.model.dueDate!=1;else oneRepeat" nameOn="meses" nameOff="anos" [isOn]="fixedService.dueDateTypeByMonth()" (newItemEvent)="updateInvestmentTime($event)" />
+        <app-switch-context [isOn]="fixedService.model.dueDateType == 'mês'" nameOn="mes" nameOff="ano" (newItemEvent)="updateInvestmentTime($event)" />
       </div>
-
-      <ng-template #oneRepeat>
-        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.dueDateTypeByMonth()" (newItemEvent)="updateInvestmentTime($event)" />
-      </ng-template>
     </div>
 
     <div class="row p-0 m-0" >
@@ -34,9 +30,11 @@
         <span class="unselected">%</span>
       </div>
       <div class="col-5">
-        <app-switch-context nameOn="mês" nameOff="ano" [isOn]="fixedService.taxesByMonth()" (newItemEvent)="updateTax($event)"></app-switch-context>
+        <app-switch-context [isOn]="fixedService.model.taxType == 'mês'" nameOn="mês" nameOff="ano" (newItemEvent)="updateTax($event)"></app-switch-context>
       </div>
+
       <p class="label_current_tax_selic unselected" *ngIf="fixedService.currentSelic!=0">taxa selic atual ({{fixedService.currentSelic}}%) ano</p>
+
     </div>
 
     <div style="width: 100%;">

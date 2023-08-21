@@ -1,6 +1,5 @@
-import { HistoricData } from './../../models/historicData';
 import { Component, Input } from '@angular/core';
-import { InvestmentModel } from 'src/app/models/InvestmentModel';
+import { HistoricData } from 'src/app/models/historicData';
 import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investiments-service.service';
 
 @Component({
