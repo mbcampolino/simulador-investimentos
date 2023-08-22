@@ -34,6 +34,9 @@ export class SimulateFixedInvestmentsComponent {
   }
 
   simulateInvestment(model: InputModel) {
+
+    this.fixedService.model = model
+
     this.router.navigateByUrl(
       'resultado?initialValue='+model.initialValue+
       '&monthlyValue='+model.monthlyValue+
@@ -46,12 +49,10 @@ export class SimulateFixedInvestmentsComponent {
 
   updateTax(taxPerMonth : boolean) {
     this.fixedService.model.taxType = taxPerMonth ? "mês" : "ano"
-    console.log("taxPerMonth" + this.fixedService.model.taxType)
   }
 
   updateInvestmentTime(dueDateType:boolean) {
     this.fixedService.model.dueDateType = dueDateType ? "mês" : "ano"
-    console.log("dueDateType" + this.fixedService.model.dueDateType)
   }
 
 }
