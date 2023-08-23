@@ -22,7 +22,7 @@ export class FixedInvestimentsServiceService {
     var backend = "/api/servico/sitebcb/historicotaxasjuros"
     var mock = "./../../assets/mock/mockselic.json"
 
-    this.getApiSelic(mock)
+    this.getApiSelic(backend)
   }
 
   // taxesByMonth() {
