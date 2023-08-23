@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { ResultsFixedInvestmentsComponent } from './pages/results-fixed-investme
 import { SimulateFixedInvestmentsComponent } from './pages/simulate-fixed-investments/simulate-fixed-investments.component';
 import { TableInvestmentsComponent } from './shared/components/table-investments/table-investments.component';
 import { SwitchContextComponent } from './shared/components/switch-context/switch-context.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,13 @@ import { SwitchContextComponent } from './shared/components/switch-context/switc
     NgApexchartsModule,
     ReactiveFormsModule,
     FormsModule,
-    CurrencyMaskModule
+    CurrencyMaskModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

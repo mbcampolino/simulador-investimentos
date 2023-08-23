@@ -1,0 +1,87 @@
+{
+  "configVersion": 1,
+  "timestamp": 1692767624364,
+  "index": "/simulador-investimentos/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/simulador-investimentos/158.ad87cdab45af76b5.js",
+        "/simulador-investimentos/favicon.ico",
+        "/simulador-investimentos/index.html",
+        "/simulador-investimentos/main.46a8e2276f5e0ace.js",
+        "/simulador-investimentos/manifest.webmanifest",
+        "/simulador-investimentos/polyfills.9512fce0e084e425.js",
+        "/simulador-investimentos/runtime.77d91a6cb8ecc679.js",
+        "/simulador-investimentos/scripts.c73d2080a01fbfd5.js",
+        "/simulador-investimentos/styles.8050ed99caa97375.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/simulador-investimentos/assets/icons/icon-128x128.png",
+        "/simulador-investimentos/assets/icons/icon-144x144.png",
+        "/simulador-investimentos/assets/icons/icon-152x152.png",
+        "/simulador-investimentos/assets/icons/icon-192x192.png",
+        "/simulador-investimentos/assets/icons/icon-384x384.png",
+        "/simulador-investimentos/assets/icons/icon-512x512.png",
+        "/simulador-investimentos/assets/icons/icon-72x72.png",
+        "/simulador-investimentos/assets/icons/icon-96x96.png",
+        "/simulador-investimentos/assets/mock/mockselic.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/simulador-investimentos/158.ad87cdab45af76b5.js": "c1d0512ba6880b6cf8743913e77b2628ddb9c911",
+    "/simulador-investimentos/assets/icons/icon-128x128.png": "b1f06c7d714abb4a0cc4d1f7c954feb26826e4c4",
+    "/simulador-investimentos/assets/icons/icon-144x144.png": "96a0d629765c1bc85d9263c6bc83094ca776d267",
+    "/simulador-investimentos/assets/icons/icon-152x152.png": "b1fbbee3902eb96a7658e3bb006f31f78ca5a44c",
+    "/simulador-investimentos/assets/icons/icon-192x192.png": "e4211163bf0911688fbfb80278d8ff4d2f77691d",
+    "/simulador-investimentos/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/simulador-investimentos/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/simulador-investimentos/assets/icons/icon-72x72.png": "279825a1ac4377032ae996a1832c641e33ccf1b6",
+    "/simulador-investimentos/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
+    "/simulador-investimentos/assets/mock/mockselic.json": "9d124cc07eefa88f9da4a92d36243d51e7c23d05",
+    "/simulador-investimentos/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "/simulador-investimentos/index.html": "4d813d90a9a04f1d5b43406d180812a4c55a49e8",
+    "/simulador-investimentos/main.46a8e2276f5e0ace.js": "b89d01d84ba72e9be9f53afca0d2ebb357cc324d",
+    "/simulador-investimentos/manifest.webmanifest": "8263890e380b13dbbc1293c5568ece2534e9a231",
+    "/simulador-investimentos/polyfills.9512fce0e084e425.js": "41630b21204044c121490d7491539797d83ce29e",
+    "/simulador-investimentos/runtime.77d91a6cb8ecc679.js": "cb284635a38421882c0940c98f475541158d1b60",
+    "/simulador-investimentos/scripts.c73d2080a01fbfd5.js": "fe7a5393b523ab5f59ee683a6af9da6f793e049d",
+    "/simulador-investimentos/styles.8050ed99caa97375.css": "26257e491f79ea60b4bceb561490a02c70408d96"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

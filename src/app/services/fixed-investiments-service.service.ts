@@ -19,7 +19,7 @@ export class FixedInvestimentsServiceService {
 
   constructor(private httpClient: HttpClient) {
 
-    var backend = "/api/servico/sitebcb/historicotaxasjuros"
+    var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
     var mock = "./../../assets/mock/mockselic.json"
 
     this.getApiSelic(backend)
@@ -154,7 +154,7 @@ export class FixedInvestimentsServiceService {
         },
         error: (err: Error) => {
           this.currentSelic = 0
-          console.log("error catch" + err)
+          console.log(err)
         }
       }
     )
