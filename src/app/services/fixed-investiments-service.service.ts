@@ -54,6 +54,8 @@ export class FixedInvestimentsServiceService {
       currentTaxValue = inputModel.taxValue
     }
 
+    ///console.log(currentTaxValue + " oiii" )
+
     for (var i : number = 0 ; i < currentDueDate + 1; i++) {
 
       if (i===0) {
@@ -90,6 +92,31 @@ export class FixedInvestimentsServiceService {
 
     return historicData
 
+  }
+
+  getTotalCalculed(tax: number, valueTotal: number, months: number, dueDateType: string) {
+
+    if (dueDateType == "ano") {
+      months = months * 12
+    }
+
+    var taxByMonth = this.getTotalWithImpost(months * 30)
+    var x = (tax/100) * taxByMonth
+
+    return this.formatValue(valueTotal - x, true) + ' (descontando impostos -' + this.getTotalWithImpost(months * 30) + '%)'
+  }
+
+  getTotalWithImpost(days: number) {
+    if (days > 720) {
+      return 15
+    } else if (days >= 361 && days <= 720 ) {
+      return 17.5
+    } else if (days >= 181 && days <= 360 ) {
+      return 20
+    } else if (days <= 180) {
+      return 22.5
+    }
+    return 0
   }
 
   formatValue(number:number, showSign: boolean = true) {
