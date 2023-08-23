@@ -6,8 +6,9 @@
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-prod": "ng build --configuration production --output-path docs --base-href=/simulador-investimentos/",
-    "server": "npx json-server --watch src/app/server/index.js --port 3000"
+    "build-prod": "ng build --configuration production --output-path docs --base-href=/simulador-investimentos/ --aot",
+    "server": "npx json-server --watch src/app/server/index.js --port 3000",
+    "build-firebase": "ng build --output-path public --base-href=/"
   },
   "private": true,
   "dependencies": {
