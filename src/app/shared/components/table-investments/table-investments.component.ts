@@ -13,9 +13,10 @@ export class TableInvestmentsComponent {
 
   @Input() isHeader: boolean = false
   @Input() last: boolean = false
+  @Input() index : number = 0
 
   @Input() data : HistoricData = {
-    currentMonth: 0,
+    currentMonth: '',
     currentTax: 0,
     currentTotalWithTax: 0,
     currentTotalWithoutTax: 0,

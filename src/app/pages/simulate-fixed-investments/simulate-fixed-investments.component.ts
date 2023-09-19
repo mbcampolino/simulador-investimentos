@@ -43,7 +43,8 @@ export class SimulateFixedInvestmentsComponent {
       '&dueDateType='+model.dueDateType+
       '&taxType='+model.taxType+
       '&taxValue='+ model.taxValue+
-      '&dueDate='+model.dueDate
+      '&dueDate='+model.dueDate+
+      '&startDate='+model.initialDate
     );
   }
 
@@ -53,6 +54,10 @@ export class SimulateFixedInvestmentsComponent {
 
   updateInvestmentTime(dueDateType:boolean) {
     this.fixedService.model.dueDateType = dueDateType ? "mês" : "ano"
+  }
+
+  getToday() : string {
+    return new Date().toISOString().slice(0, 10)
   }
 
 }

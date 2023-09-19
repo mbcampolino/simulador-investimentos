@@ -37,7 +37,6 @@ export class ResultsFixedInvestmentsComponent {
 
   constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute) {
     var model = this.getModel()
-    console.log(model)
     this.investments = this.fixedService.calcFixedInvestment(model)
     this.plotChart(this.investments)
   }
@@ -52,22 +51,28 @@ export class ResultsFixedInvestmentsComponent {
     input.taxType =  this.activeRoute.snapshot.queryParamMap.get('taxType')!!,
     input.taxValue = Number.parseFloat(this.activeRoute.snapshot.queryParamMap.get('taxValue')!!),
     input.monthlyValue = Number.parseFloat(this.activeRoute.snapshot.queryParamMap.get('monthlyValue')!!)
+    input.initialDate = this.activeRoute.snapshot.queryParamMap.get('startDate')!!
 
     return input
   }
 
   plotChart(historic: HistoricData []) {
 
-    var meses: number[] = []
+    var index: number[] = []
+    var meses: string[] = []
     var valueTotal: number[] = []
     var invested: number[] = []
     var tax: number[] = []
+
+    var valueIndex = 0
 
     historic.forEach(element => {
       meses.push(element.currentMonth)
       valueTotal.push(element.currentTotalWithTax)
       tax.push(element.totalTax)
       invested.push(element.currentTotalWithoutTax)
+      index.push(valueIndex)
+      valueIndex += 1
     });
 
     this.chartOptions = {
@@ -90,7 +95,7 @@ export class ResultsFixedInvestmentsComponent {
         text: ""
       },
       xaxis: {
-        categories: meses
+        categories: index
       },
       yaxis: {
         labels: {

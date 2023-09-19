@@ -1,5 +1,5 @@
 export class HistoricData {
-  'currentMonth' : number
+  'currentMonth' : string
   'currentTax' : number
   'currentTotalWithTax' : number
   'currentTotalWithoutTax' : number
@@ -14,5 +14,6 @@ export class InputModel {
   taxType: string = "ano"
   taxValue : number = 13.25
   monthlyValue : number = 1000
+  initialDate: string = new Date().toISOString().slice(0, 10)
 
 }

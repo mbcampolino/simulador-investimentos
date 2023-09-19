@@ -13,6 +13,11 @@
       <input currencyMask [(ngModel)]="fixedService.model.monthlyValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" />
     </div>
 
+    <div>
+      <p class="label_input money unselected">data inicial do investimento (opcional)</p>
+      <input type="date" value="{{getToday()}}" [(ngModel)]="fixedService.model.initialDate" />
+    </div>
+
     <div class="row p-0 m-0">
       <p class="label_input unselected">tempo de investimento</p>
       <div class="col">

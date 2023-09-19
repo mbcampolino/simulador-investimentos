@@ -16,24 +16,14 @@ export class FixedInvestimentsServiceService {
   total: number = 0 /// total acumulado
   lastMonthTax: number = 0 /// ultimo rendimento mensal
   currentSelic: number = 0
+  investimentsByMonth = false
 
   constructor(private httpClient: HttpClient) {
 
-    var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
+    //var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
     var mock = "./../../assets/mock/mockselic.json"
-
-    this.getApiSelic(backend)
+    this.getApiSelic(mock)
   }
-
-  // taxesByMonth() {
-  //   return this.activeRoute.snapshot.params['taxType'] == "mês"
-  // }
-
-  // dueDateTypeByMonth() {
-  //   return this.activeRoute.snapshot.params['dueDateType'] == "mês"
-  // }
-
-  investimentsByMonth = false
 
   calcFixedInvestment(inputModel: InputModel) : HistoricData[] {
 
@@ -54,13 +44,11 @@ export class FixedInvestimentsServiceService {
       currentTaxValue = inputModel.taxValue
     }
 
-    ///console.log(currentTaxValue + " oiii" )
-
     for (var i : number = 0 ; i < currentDueDate + 1; i++) {
 
       if (i===0) {
         var data : HistoricData = {
-          'currentMonth' : 0,
+          'currentMonth' : this.returnDate(i, inputModel.initialDate),
           'currentTax' : 0,
           'currentTotalWithTax' : inputModel.initialValue,
           'currentTotalWithoutTax' : inputModel.initialValue,
@@ -73,25 +61,30 @@ export class FixedInvestimentsServiceService {
 
         var totalTax = currentTax + historicData[i-1].totalTax;
 
-        //console.log(historicData[i-1].currentTotalWithTax + " + " + currentTax + " + " + inputModel.monthlyValue)
-
         var currentTotalWithTax = (historicData[i-1].currentTotalWithTax + currentTax) + inputModel.monthlyValue
         var currentTotalWithoutTax = (historicData[i-1].currentTotalWithoutTax) + inputModel.monthlyValue
 
         var data : HistoricData = {
-          'currentMonth' : i,
+          'currentMonth' : this.returnDate(i, inputModel.initialDate),
           'currentTax' : currentTax,
           'currentTotalWithTax' : currentTotalWithTax,
           'currentTotalWithoutTax' : currentTotalWithoutTax,
           'totalTax': totalTax
         }
-        //console.log(data)
+
         historicData.push(data)
       }
     }
 
     return historicData
 
+  }
+
+  returnDate(pos: number, initialDate: string) : string {
+    var today = new Date(initialDate)
+    var date = new Date(today.setMonth(today.getMonth() + pos)).toISOString()
+    console.log(date)
+    return date
   }
 
   getTotalCalculed(tax: number, valueTotal: number, months: number, dueDateType: string) {
