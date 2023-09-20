@@ -2,13 +2,13 @@
 <div class="container">
   <div class="row">
 
-    <div class="row header" (click)="backToSimulate()">
-      <div class="col" style="margin: 0; text-align: left; max-width: 19px;">
+    <div class="row header_">
+      <div class="col-1 back_" (click)="backToSimulate()">
         <svg  xmlns="http://www.w3.org/2000/svg" width="19" height="28" viewBox="0 0 19 28" fill="none">
-          <path d="M13.8182 0L0 13.8182L13.8182 27.6364L19 22.4545L10.3636 13.8182L19 5.18182L13.8182 0Z" fill="black"/>
+          <path d="M13.8182 0L0 13.8182L13.8182 27.6364L19 22.4545L10.3636 13.8182L19 5.18182L13.8182 0Z" fill="white"/>
         </svg>
       </div>
-      <div class="col" style="margin: 0; text-align: left;">
+      <div class="col title_">
         <p style="margin-left: 16px;">voltar para simulação</p>
       </div>
     </div>
@@ -17,20 +17,20 @@
       {{getModel().taxValue}}% ao {{getModel().taxType}} sem impostos e inflação você
       teria o equivalente a:</p>
 
-      <div class="row" style="background-color: black;">
+      <div class="row" style="background-color: black;margin-left: 0px;">
         <div class="col" style="margin: 0; text-align: left;">
           <p class="cifrao-result">R$ <span class="value-result">{{fixedService.formatValue(investments.slice(-1)[0].currentTotalWithTax, false)}}</span><span class="after-value-result"> em caixa</span></p>
           <p style="color: green;font-weight: 600;">{{fixedService.getTotalCalculed(investments.slice(-1)[0].totalTax, investments.slice(-1)[0].currentTotalWithTax, getModel().dueDate, getModel().dueDateType)}}</p>
         </div>
       </div>
 
-      <div class="row" style="margin-bottom: 32px;background-color: rgb(26, 26, 26);" >
+      <div class="row" style="margin-bottom: 32px;background-color: rgb(20, 20, 20);margin-left: 0px;padding-bottom: 16px;" >
         <div class="col cifrao-result" style="margin: 0; text-align: left;">
           <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(investments.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
         </div>
       </div>
 
-      <div style="text-align:center; padding: 0;">
+      <div style="text-align:center; padding: 0;z-index: -10;">
 
         <apx-chart
           [series]="chartOptions.series"
@@ -55,6 +55,7 @@
 
     <div style="width: 100%;">
       <button class="button_action unselected" (click)="share()">compartilhar simulação</button>
+      <button class="button_action_refazer unselected" routerLink="/">refazer simulação</button>
     </div>
 
   </div>

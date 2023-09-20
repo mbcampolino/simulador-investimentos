@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1692768543691,
+  "timestamp": 1695168156930,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -11,13 +11,13 @@
         "ignoreVary": true
       },
       "urls": [
-        "/158.ad87cdab45af76b5.js",
+        "/158.d6dd26711c420435.js",
         "/favicon.ico",
         "/index.html",
-        "/main.46a8e2276f5e0ace.js",
+        "/main.82be34ee4611793d.js",
         "/manifest.webmanifest",
         "/polyfills.9512fce0e084e425.js",
-        "/runtime.77d91a6cb8ecc679.js",
+        "/runtime.c438fb330c1293b6.js",
         "/scripts.c73d2080a01fbfd5.js",
         "/styles.8050ed99caa97375.css"
       ],
@@ -41,17 +41,17 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/158.ad87cdab45af76b5.js": "c1d0512ba6880b6cf8743913e77b2628ddb9c911",
+    "/158.d6dd26711c420435.js": "7382a0fc4c8a3740d7f9b168229f538d5a6d8687",
     "/assets/icons/icon-128x128.png": "2291b6f4ee822761866ea9a0be6722ae7809a09d",
     "/assets/icons/icon-256x256.png": "8105637f31db1ed849c2e45196425501359ae0c6",
     "/assets/icons/icon-512x512.png": "1e321aba92a82dfde149da5f4a2f3345b4463dfe",
     "/assets/mock/mockselic.json": "9d124cc07eefa88f9da4a92d36243d51e7c23d05",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "8127e9a339abef7b6f07eaab39d9d89da895a260",
-    "/main.46a8e2276f5e0ace.js": "b89d01d84ba72e9be9f53afca0d2ebb357cc324d",
+    "/index.html": "84109223b1e1cba0161f9d2c10d9cbc58a58dfc5",
+    "/main.82be34ee4611793d.js": "2cce97df67e016b50a2e62358b1767a47fcd8d0e",
     "/manifest.webmanifest": "6c906943250ffccd83289cca9ff6c1104a571ca8",
     "/polyfills.9512fce0e084e425.js": "41630b21204044c121490d7491539797d83ce29e",
-    "/runtime.77d91a6cb8ecc679.js": "cb284635a38421882c0940c98f475541158d1b60",
+    "/runtime.c438fb330c1293b6.js": "c4377e7a149587b704101ad26cff5360e8bd91b0",
     "/scripts.c73d2080a01fbfd5.js": "fe7a5393b523ab5f59ee683a6af9da6f793e049d",
     "/styles.8050ed99caa97375.css": "26257e491f79ea60b4bceb561490a02c70408d96"
   },
