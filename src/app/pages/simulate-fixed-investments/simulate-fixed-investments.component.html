@@ -5,12 +5,12 @@
 
     <div>
       <p class="label_input money unselected">valor inicial</p>
-      <input currencyMask [(ngModel)]="fixedService.model.initialValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" />
+      <input currencyMask [(ngModel)]="fixedService.model.initialValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative : true }" />
     </div>
 
     <div>
       <p class="label_input unselected">aporte mensal</p>
-      <input currencyMask [(ngModel)]="fixedService.model.monthlyValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" />
+      <input currencyMask [(ngModel)]="fixedService.model.monthlyValue" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left', allowNegative : true }" />
     </div>
 
     <div>
