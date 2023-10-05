@@ -20,9 +20,9 @@ export class FixedInvestimentsServiceService {
 
   constructor(private httpClient: HttpClient) {
 
-    //var backend = "https://www.bcb.gov.br/api/servico/sitebcb/historicotaxasjuros"
-    var mock = "./../../assets/mock/mockselic.json"
-    this.getApiSelic(mock)
+    var backend = "/api/servico/sitebcb/historicotaxasjuros"
+    //var mock = "./../../assets/mock/mockselic.json"
+    this.getApiSelic(backend)
   }
 
   calcFixedInvestment(inputModel: InputModel) : HistoricData[] {
