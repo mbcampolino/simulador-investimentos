@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SimulateFixedInvestmentsComponent } from './simulate-fixed-investments.component';
+import { SimulateFixedInvestmentsComponent } from './SimulateFixedInvestmentsComponent';
 
 describe('SimulateFixedInvestmentsComponent', () => {
   let component: SimulateFixedInvestmentsComponent;

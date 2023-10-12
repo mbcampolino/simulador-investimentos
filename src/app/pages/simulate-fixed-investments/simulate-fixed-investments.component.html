@@ -31,7 +31,7 @@
     <div class="row p-0 m-0" >
       <p class="label_input unselected">taxa de juros</p>
       <div class="col percentInput">
-        <input type="number" [(ngModel)]="fixedService.currentSelic">
+        <input type="number" [(ngModel)]="fixedService.model.taxValue">
         <span class="unselected">%</span>
       </div>
       <div class="col-5">
@@ -43,9 +43,8 @@
     </div>
 
     <div style="width: 100%;">
-      <button class="button_action unselected"(click)="simulateInvestment(fixedService.model)">simular investimento</button>
+      <button class="button_action unselected" style="margin-top: 32px;margin-bottom: 32px;"  (click)="simulateInvestment(fixedService.model)">simular investimento</button>
     </div>
-
 
   </div>
 </div>

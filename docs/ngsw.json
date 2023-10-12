@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1696510612052,
+  "timestamp": 1697148860873,
   "index": "/simulador-investimentos/index.html",
   "assetGroups": [
     {
@@ -14,7 +14,7 @@
         "/simulador-investimentos/158.4b0da9908e3aaff0.js",
         "/simulador-investimentos/favicon.ico",
         "/simulador-investimentos/index.html",
-        "/simulador-investimentos/main.43117d21369b1953.js",
+        "/simulador-investimentos/main.9647b7373b65d6d5.js",
         "/simulador-investimentos/manifest.webmanifest",
         "/simulador-investimentos/polyfills.9512fce0e084e425.js",
         "/simulador-investimentos/runtime.8ea2d7f133354ab5.js",
@@ -47,8 +47,8 @@
     "/simulador-investimentos/assets/icons/icon-512x512.png": "1e321aba92a82dfde149da5f4a2f3345b4463dfe",
     "/simulador-investimentos/assets/mock/mockselic.json": "9d124cc07eefa88f9da4a92d36243d51e7c23d05",
     "/simulador-investimentos/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/simulador-investimentos/index.html": "9b234600f70f49a66a03ad21c4726fbbf17d5dbf",
-    "/simulador-investimentos/main.43117d21369b1953.js": "fb1d90fc604b4565a7a26ffe1205690e1b8ae5b9",
+    "/simulador-investimentos/index.html": "093e5eea869a015bd72e59bc9b90f1838071b837",
+    "/simulador-investimentos/main.9647b7373b65d6d5.js": "120c0a8ffdac05c8f0cbbe3fa92274bbf9d78a86",
     "/simulador-investimentos/manifest.webmanifest": "6c906943250ffccd83289cca9ff6c1104a571ca8",
     "/simulador-investimentos/polyfills.9512fce0e084e425.js": "41630b21204044c121490d7491539797d83ce29e",
     "/simulador-investimentos/runtime.8ea2d7f133354ab5.js": "a606f91665a9e009ee9fa56b452025fdf9d17a33",

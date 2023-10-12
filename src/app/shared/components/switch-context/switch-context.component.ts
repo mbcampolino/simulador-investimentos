@@ -15,7 +15,7 @@ export class SwitchContextComponent {
   @Output() newItemEvent = new EventEmitter<boolean>();
 
   ngOnInit() {
-    console.log(this.isOn)
+    //console.log(this.isOn)
   }
 
 }

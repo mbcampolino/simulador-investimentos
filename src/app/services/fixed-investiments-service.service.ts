@@ -83,7 +83,7 @@ export class FixedInvestimentsServiceService {
   returnDate(pos: number, initialDate: string) : string {
     var today = new Date(initialDate)
     var date = new Date(today.setMonth(today.getMonth() + pos)).toISOString()
-    console.log(date)
+    //console.log(date)
     return date
   }
 

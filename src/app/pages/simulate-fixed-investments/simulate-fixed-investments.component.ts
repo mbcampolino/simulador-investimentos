@@ -2,6 +2,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investiments-service.service';
 import { InputModel } from 'src/app/models/historicData';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { CacheModel } from 'src/app/models/CacheModel';
 
 @Component({
   selector: 'app-simulate-fixed-investments',
@@ -10,7 +12,7 @@ import { InputModel } from 'src/app/models/historicData';
 })
 export class SimulateFixedInvestmentsComponent {
 
-  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute) {
+  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute, public localStorageService: LocalstorageService) {
 
     ///activedRoute
     if (this.activeRoute.snapshot.queryParamMap.get('initialValue')) {
@@ -33,19 +35,30 @@ export class SimulateFixedInvestmentsComponent {
     return input
   }
 
+  setShowLastSearch() {
+    this.localStorageService.showLastSearch =! this.localStorageService.showLastSearch
+  }
+
+
   simulateInvestment(model: InputModel) {
 
     this.fixedService.model = model
 
-    this.router.navigateByUrl(
-      'resultado?initialValue='+model.initialValue+
-      '&monthlyValue='+model.monthlyValue+
-      '&dueDateType='+model.dueDateType+
-      '&taxType='+model.taxType+
-      '&taxValue='+ model.taxValue+
-      '&dueDate='+model.dueDate+
-      '&startDate='+model.initialDate
-    );
+    var url = 'resultado?initialValue='+model.initialValue+
+    '&monthlyValue='+model.monthlyValue+
+    '&dueDateType='+model.dueDateType+
+    '&taxType='+model.taxType+
+    '&taxValue='+ model.taxValue+
+    '&dueDate='+model.dueDate+
+    '&startDate='+model.initialDate
+
+    // this.localStorageService.add({
+    //     id : "",
+    //     url : url,
+    //     name : this.getToday() +": R$" + model.initialValue + " R$" + model.monthlyValue + "/mês a " + model.taxValue + "%"
+    //   }
+    // )
+    this.router.navigateByUrl(url);
   }
 
   updateTax(taxPerMonth : boolean) {
