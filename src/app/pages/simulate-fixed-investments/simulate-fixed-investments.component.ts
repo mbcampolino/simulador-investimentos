@@ -14,7 +14,6 @@ export class SimulateFixedInvestmentsComponent {
 
   constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute, public localStorageService: LocalstorageService) {
 
-    ///activedRoute
     if (this.activeRoute.snapshot.queryParamMap.get('initialValue')) {
       this.simulateInvestment(this.getModel())
     }
