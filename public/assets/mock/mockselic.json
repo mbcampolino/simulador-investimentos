@@ -1,0 +1,17 @@
+{
+  "conteudo": [
+    {
+      "NumeroReuniaoCopom": 255.0,
+      "ReuniaoExtraordinaria": false,
+      "DataReuniaoCopom": "2023-06-21T03:00:00Z",
+      "Vies": "sem viés",
+      "UsoMetaSelic": false,
+      "DataInicioVigencia": "2023-06-22T03:00:00Z",
+      "DataFimVigencia": null,
+      "MetaSelic": 13.25,
+      "TaxaTban": null,
+      "TaxaSelicEfetivaVigencia": null,
+      "TaxaSelicEfetivaAnualizada": null
+    }
+  ]
+}

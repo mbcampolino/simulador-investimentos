@@ -1,0 +1,133 @@
+.button_action {
+  background-color: black;
+  padding: 16px;
+  color: white;
+  position: relative ;
+  width: 100%;
+  border-radius: 90px;
+  margin-top: 32px;
+}
+
+.button_action_refazer {
+  background-color: rgb(226, 226, 226);
+  padding: 16px;
+  color: black;
+  position: relative ;
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 90px;
+  margin-bottom: 32px;
+  border: 0px;
+}
+
+.description_value {
+  padding-top: 72px;
+  padding-bottom: 14px;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  margin-bottom: 0;
+}
+
+.cifrao-result {
+  font-size: 38px;
+  color: white;
+  font-weight: bold;
+  margin: auto;
+  vertical-align: baseline;
+}
+
+.value-result {
+  font-size: 38px;
+  color: white;
+  font-weight: 500;
+  margin: auto;
+  vertical-align: baseline;
+}
+
+.value-result-month {
+  font-size: 32px;
+  color: white;
+  font-weight: 500;
+  margin: auto;
+  vertical-align: baseline;
+}
+
+.after-value-result {
+  font-size: 18px;
+  color: white;
+  font-weight: 500;
+  margin: auto;
+  vertical-align: baseline;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+.table-inner {
+  width: 100%;
+  min-width: 760px;
+}
+
+.header_ {
+  width: 100%;
+  height: 54px;
+  position: sticky;
+  top: 0;
+  background-color: black;
+  margin: 0px;
+  padding: 0px;
+  z-index: 10;
+}
+
+.back_ {
+  cursor: pointer;
+  margin-top: 12px;
+}
+
+.title_ {
+  margin-top: 12px;
+  text-align: left;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .description_value {
+    padding-top: 68px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .cifrao-result,
+  .value-result {
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+  }
+
+  .value-result-month {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .after-value-result {
+    font-size: 0.8rem;
+  }
+
+  .table-inner {
+    min-width: 720px;
+  }
+}
+
+@media (max-width: 480px) {
+  .description_value {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .table-inner {
+    min-width: 680px;
+  }
+}

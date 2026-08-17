@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ResultsFixedInvestmentsComponent } from './pages/results-fixed-investments/results-fixed-investments.component';
+import { SimulateFixedInvestmentsComponent } from './pages/simulate-fixed-investments/simulate-fixed-investments.component';
 
 const routes: Routes = [
 
   {
-    path: '', redirectTo: 'simular', pathMatch: 'full'
-  },
-  {
-    path: 'simular',
-    loadChildren: () => import('./modules/simulate-fixed-investments/simulate-fixed-investments.module').then(m => m.SimulateFixedInvestmentsModule)
+    path: '',
+    component: SimulateFixedInvestmentsComponent
   },
   {
     path: 'resultado',
-    loadChildren: () => import('./modules/results-fixed-investments/results-fixed-investments.module').then(m => m.ResultsFixedInvestmentsModule)
-  }
-
+    loadChildren: () => import('./pages/results-fixed-investments/results-fixed-invetments.module').then(m => m.ResultsFixedInvetmentsModule)
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes),
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
