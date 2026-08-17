@@ -52,7 +52,8 @@ export class FixedInvestimentsServiceService {
           'currentTax' : 0,
           'currentTotalWithTax' : inputModel.initialValue,
           'currentTotalWithoutTax' : inputModel.initialValue,
-          'totalTax': 0
+          'totalTax': 0,
+          'monthInvestment': 0
         }
         historicData.push(data)
       } else {
@@ -69,7 +70,8 @@ export class FixedInvestimentsServiceService {
           'currentTax' : currentTax,
           'currentTotalWithTax' : currentTotalWithTax,
           'currentTotalWithoutTax' : currentTotalWithoutTax,
-          'totalTax': totalTax
+          'totalTax': totalTax,
+          'monthInvestment': inputModel.monthlyValue
         }
 
         historicData.push(data)
@@ -78,6 +80,54 @@ export class FixedInvestimentsServiceService {
 
     return historicData
 
+  }
+
+  recalculateInvestedValue(historic: HistoricData[], editedIndex: number, newValue: number, inputModel: InputModel = this.model): HistoricData[] {
+    if (!historic || historic.length === 0) {
+      return []
+    }
+
+    const config = inputModel ?? this.model
+    const monthlyTax = config.taxType === 'ano' ? config.taxValue / 12 : config.taxValue
+    const recalculated = historic.map(item => ({ ...item }))
+
+    if (editedIndex < 0 || editedIndex >= recalculated.length) {
+      return recalculated
+    }
+
+    recalculated[editedIndex].monthInvestment = Number(newValue)
+
+    const initialValue = config.initialValue ?? 0
+    recalculated[0] = {
+      ...recalculated[0],
+      currentMonth: this.returnDate(0, config.initialDate),
+      currentTax: 0,
+      currentTotalWithTax: initialValue,
+      currentTotalWithoutTax: initialValue,
+      totalTax: 0,
+      monthInvestment: 0
+    }
+
+    for (let i = 1; i < recalculated.length; i++) {
+      const previous = recalculated[i - 1]
+      const monthInvestment = recalculated[i].monthInvestment ?? config.monthlyValue
+      const currentTax = (previous.currentTotalWithTax / 100) * monthlyTax
+      const totalTax = previous.totalTax + currentTax
+      const currentTotalWithoutTax = previous.currentTotalWithoutTax + monthInvestment
+      const currentTotalWithTax = previous.currentTotalWithTax + currentTax + monthInvestment
+
+      recalculated[i] = {
+        ...recalculated[i],
+        currentMonth: this.returnDate(i, config.initialDate),
+        currentTax,
+        currentTotalWithoutTax,
+        totalTax,
+        currentTotalWithTax,
+        monthInvestment: monthInvestment
+      }
+    }
+
+    return recalculated
   }
 
   returnDate(pos: number, initialDate: string) : string {

@@ -12,7 +12,12 @@ import { CacheModel } from 'src/app/models/CacheModel';
 })
 export class SimulateFixedInvestmentsComponent {
 
+  savedSimulations: CacheModel[] = []
+  showSavedList = false
+
   constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute, public localStorageService: LocalstorageService) {
+
+    this.savedSimulations = this.localStorageService.getItem()
 
     if (this.activeRoute.snapshot.queryParamMap.get('initialValue')) {
       this.simulateInvestment(this.getModel())
@@ -38,25 +43,31 @@ export class SimulateFixedInvestmentsComponent {
     this.localStorageService.showLastSearch =! this.localStorageService.showLastSearch
   }
 
+  toggleSavedList() {
+    this.savedSimulations = this.localStorageService.getItem()
+    this.showSavedList = !this.showSavedList
+  }
+
+  openSavedSimulation(simulation: CacheModel) {
+    this.router.navigateByUrl(simulation.url)
+  }
+
+  removeSavedSimulation(id: string) {
+    this.localStorageService.remove(id)
+    this.savedSimulations = this.localStorageService.getItem()
+    this.showSavedList = this.savedSimulations.length > 0
+  }
 
   simulateInvestment(model: InputModel) {
 
     this.fixedService.model = model
 
-    var url = 'resultado?initialValue='+model.initialValue+
-    '&monthlyValue='+model.monthlyValue+
-    '&dueDateType='+model.dueDateType+
-    '&taxType='+model.taxType+
-    '&taxValue='+ model.taxValue+
-    '&dueDate='+model.dueDate+
-    '&startDate='+model.initialDate
+    const simulation = this.localStorageService.saveSimulation(model, [])
 
-    // this.localStorageService.add({
-    //     id : "",
-    //     url : url,
-    //     name : this.getToday() +": R$" + model.initialValue + " R$" + model.monthlyValue + "/mês a " + model.taxValue + "%"
-    //   }
-    // )
+    var url = this.localStorageService.buildUrl(model, simulation.id)
+
+    this.savedSimulations = this.localStorageService.getItem()
+    this.showSavedList = false
     this.router.navigateByUrl(url);
   }
 

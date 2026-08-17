@@ -19,14 +19,14 @@
 
       <div class="row" style="background-color: black;margin-left: 0px;">
         <div class="col" style="margin: 0; text-align: left;">
-          <p class="cifrao-result">R$ <span class="value-result">{{fixedService.formatValue(investments.slice(-1)[0].currentTotalWithTax, false)}}</span><span class="after-value-result"> em caixa</span></p>
-          <p style="color: green;font-weight: 600;">{{fixedService.getTotalCalculed(investments.slice(-1)[0].totalTax, investments.slice(-1)[0].currentTotalWithTax, getModel().dueDate, getModel().dueDateType)}}</p>
+          <p class="cifrao-result">R$ <span class="value-result">{{fixedService.formatValue(lastHistoricItem?.currentTotalWithTax ?? 0, false)}}</span><span class="after-value-result"> em caixa</span></p>
+          <p style="color: green;font-weight: 600;">{{fixedService.getTotalCalculed(lastHistoricItem?.totalTax ?? 0, lastHistoricItem?.currentTotalWithTax ?? 0, getModel().dueDate, getModel().dueDateType)}}</p>
         </div>
       </div>
 
       <div class="row" style="margin-bottom: 32px;background-color: rgb(20, 20, 20);margin-left: 0px;padding-bottom: 16px;" >
         <div class="col cifrao-result" style="margin: 0; text-align: left;">
-          <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(investments.slice(-1)[0].currentTax, false)}}</span><span class="after-value-result"> de renda mensal</span>
+          <p class="cifrao-result">R$ <span class="value-result-month">{{fixedService.formatValue(lastHistoricItem?.currentTax ?? 0, false)}}</span><span class="after-value-result"> de renda mensal</span>
         </div>
       </div>
 
@@ -43,12 +43,18 @@
 
       </div>
 
-    <div [ngClass]="{'scrool': detectMob()}">
-      <div [ngClass]="{'expand-content': !detectMob(), 'max-content': detectMob()}">
+    <div class="table-scroll">
+      <div class="table-inner">
         <app-table-investments  [isHeader]="true"></app-table-investments>
 
         <div *ngFor="let item of investments; last as last; index as i">
-          <app-table-investments [data]="item" [last]="last" [index]="i"></app-table-investments>
+          <app-table-investments
+            [data]="item"
+            [last]="last"
+            [index]="i"
+            [items]="investments"
+            (investedValueChange)="onInvestedChange($event)"
+          ></app-table-investments>
         </div>
       </div>
     </div>

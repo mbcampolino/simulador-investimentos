@@ -43,7 +43,37 @@
     </div>
 
     <div style="width: 100%;">
-      <button class="button_action unselected" style="margin-top: 32px;margin-bottom: 32px;"  (click)="simulateInvestment(fixedService.model)">simular investimento</button>
+      <button class="button_action unselected" style="margin-top: 32px;"  (click)="simulateInvestment(fixedService.model)">simular investimento</button>
+
+      <button
+        *ngIf="localStorageService.getItem().length > 0"
+        class="button_action_refazer unselected"
+        type="button"
+        style="margin-top: 12px;"
+        (click)="toggleSavedList()"
+      >
+        suas simulações
+      </button>
+
+      <div *ngIf="showSavedList" class="saved-list">
+        <div
+          *ngFor="let simulation of localStorageService.getItem()"
+          class="saved-item"
+        >
+          <button type="button" class="saved-item__content" (click)="openSavedSimulation(simulation)">
+            {{ simulation.name }}
+          </button>
+
+          <button
+            type="button"
+            class="saved-item__remove"
+            aria-label="Remover simulação"
+            (click)="removeSavedSimulation(simulation.id)"
+          >
+            remover
+          </button>
+        </div>
+      </div>
     </div>
 
   </div>

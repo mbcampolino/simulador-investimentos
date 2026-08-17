@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FixedInvestimentsServiceService } from 'src/app/services/fixed-investiments-service.service';
+import { LocalstorageService } from 'src/app/services/localstorage.service';
 
 import {
   ChartComponent,
@@ -12,6 +13,7 @@ import {
   ApexYAxis
 } from "ng-apexcharts";
 import { HistoricData, InputModel } from 'src/app/models/historicData';
+import { CacheModel } from 'src/app/models/CacheModel';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries | any;
@@ -33,10 +35,27 @@ export class ResultsFixedInvestmentsComponent {
   chart: ChartComponent = {} as ChartComponent
   public chartOptions = {} as Partial<ChartOptions>;
 
-  investments: HistoricData []
+  investments: HistoricData [] = []
+  savedId: string | null = null
 
-  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute) {
+  constructor(public router: Router, public fixedService: FixedInvestimentsServiceService, public activeRoute: ActivatedRoute, public localStorageService: LocalstorageService) {
+    this.savedId = this.activeRoute.snapshot.queryParamMap.get('savedId')
+
+    if (this.savedId) {
+      const saved = this.localStorageService.getById(this.savedId)
+
+      if (saved && saved.model) {
+        this.fixedService.model = saved.model
+        this.investments = saved.historic && saved.historic.length > 0
+          ? saved.historic
+          : this.fixedService.calcFixedInvestment(saved.model)
+        this.plotChart(this.investments)
+        return
+      }
+    }
+
     var model = this.getModel()
+    this.fixedService.model = model
     this.investments = this.fixedService.calcFixedInvestment(model)
     this.plotChart(this.investments)
   }
@@ -54,6 +73,10 @@ export class ResultsFixedInvestmentsComponent {
     input.initialDate = this.activeRoute.snapshot.queryParamMap.get('startDate')!!
 
     return input
+  }
+
+  get lastHistoricItem(): HistoricData | undefined {
+    return this.investments && this.investments.length > 0 ? this.investments[this.investments.length - 1] : undefined
   }
 
   plotChart(historic: HistoricData []) {
@@ -123,6 +146,19 @@ export class ResultsFixedInvestmentsComponent {
     var mobile = isSizePrefer && isMobile
 
     return pc || mobile
+  }
+
+  onInvestedChange(updatedItems: HistoricData[]) {
+    this.investments = [...updatedItems]
+    this.plotChart(this.investments)
+
+    if (this.savedId) {
+      const saved = this.localStorageService.getById(this.savedId)
+
+      if (saved) {
+        this.localStorageService.update(this.savedId, this.fixedService.model, this.investments, saved.name)
+      }
+    }
   }
 
   backToSimulate() {

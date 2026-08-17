@@ -4,6 +4,7 @@ export class HistoricData {
   'currentTotalWithTax' : number
   'currentTotalWithoutTax' : number
   'totalTax' : number
+  'monthInvestment' : number
 }
 
 export class InputModel {
